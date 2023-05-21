@@ -5,7 +5,7 @@ from collections import deque
 
 st.title("Text to Speech App powered by Gradio API hosted on 🤗")
 
-# Initialize the last_five_inputs list in the st.session_state dictionary
+# Initialize the last_five_inputs deque in the st.session_state dictionary
 if 'last_five_inputs' not in st.session_state:
     st.session_state.last_five_inputs = deque(maxlen=5)
 
@@ -22,7 +22,7 @@ if button:
             inp_text,
         ]}).json()
 
-        # Append the input text to the last_five_inputs list in st.session_state
+        # Append the input text to the last_five_inputs deque in st.session_state
         st.session_state.last_five_inputs.append(inp_text)
 
         md = f"""
@@ -35,5 +35,5 @@ if button:
 # Show the last 5 input texts
 if st.session_state.last_five_inputs:
     st.write("Last 5 input texts:")
-    for i, inp in enumerate(st.session_state.last_five_inputs):
+    for i, inp in enumerate(reversed(st.session_state.last_five_inputs)):
         st.write(f"{i+1}. {inp}")
