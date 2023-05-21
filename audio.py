@@ -3,7 +3,7 @@ import requests
 import base64
 from collections import deque
 
-st.title("Text to Speech App powered by Gradio API hosted on 🤗")
+st.title("Text to Speech")
 
 # Initialize the last_five_inputs deque in the st.session_state dictionary
 if 'last_five_inputs' not in st.session_state:
