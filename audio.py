@@ -22,12 +22,18 @@ if button:
             inp_text,
         ]}).json()
 
+        try:
+            audio_url = response_json['data'][0]
+        except KeyError:
+            st.error("Error: Unexpected API response format")
+            st.stop()
+
         # Append the input text to the last_five_inputs deque in st.session_state
         st.session_state.last_five_inputs.append(inp_text)
 
         md = f"""
             <audio controls>
-            <source src="{response_json['data'][0]}" type="audio/flac">
+            <source src="{audio_url}" type="audio/flac">
             </audio>
             """
         st.markdown(md, unsafe_allow_html=True)
